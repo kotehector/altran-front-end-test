@@ -1,58 +1,24 @@
 <template>
   <div>
-    <h1>Ciudad: {{ name }}</h1>
-    <!-- <el-card class="box-card" v-if="transaction">
+    <GoBackButton />
+    <el-card class="box-card" v-if="city">
       <div slot="header" class="clearfix">
-        <h3>Detalle de la Transacción: <span>{{ transaction.transaction_name  }}</span></h3>
-        <el-button type="text">Enviar</el-button>
-        <go-back-button />
+        <h1>Ciudad: {{ name }}</h1>    
+        
       </div>
-      <el-collapse v-model="activeData" @change="handleChange">
-        <el-collapse-item title="Info" name="1">
-          <div>
-            <p>Id Mensajero: {{ transaction.courier_name }}</p>
-            <p>Fecha de Creación: {{ transaction.created_at }}</p>
-            <p>Cantnamead total de dinero: {{ transaction.money_amount }}</p>
-            <p>¿Nuevo Usuario? {{ transaction.new_user }}</p>
-            <p>Id de Usuario: {{ transaction.user_name }}</p>
-          </div>
-        </el-collapse-item>
-        <el-collapse-item title="Origen / Destino" name="2">
-          <el-row :gutter="10">
-            <el-col :span="12">
-              <div v-if="transaction.origin">
-                <h2>Origin</h2>
-                <h3>ID:</h3>
-                <p>{{ transaction.origin.name }}</p>
-                <h3>Descripción:</h3>
-                <p>{{ transaction.origin.description }}</p>
-                <h3>Mapa</h3>
-                <img :src="originMapUrl" alt="">
-                <p>Latitud: <span>{{ transaction.origin.lat }}</span> - Longitud: <span>{{ transaction.origin.lng }}</span></p>
-              </div>
-            </el-col>
-            <el-col :span="12">
-              <div v-if="transaction.destination">
-                <h2>Destino</h2>
-                <h3>ID:</h3>
-                <p>{{ transaction.destination.name }}</p>
-                <h3>Descripción:</h3>
-                <p>{{ transaction.destination.description }}</p>
-                <h3>Mapa</h3>
-                <img :src="destinationMapUrl" alt="">
-                <p>Latitud:<span>{{ transaction.destination.lat }}</span> - Longitud: <span>{{ transaction.destination.lng }}</span></p>
-              </div>
-            </el-col>
-          </el-row>
-        </el-collapse-item>
-      </el-collapse>
-    </el-card> -->
+      <!-- <img v-if="urlImage" :src='urlImage' class="image"> -->
+      <span>T: {{city.main.temp }} ºC</span>
+      <span>H: {{city.main.humidity }} %</span>
+      <span>Max: {{city.main.temp_max }} ºC</span>
+      <span>Min: {{city.main.temp_min }} ºC</span>
+    </el-card>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import GoBackButton from '@/components/GoBackButton'
+
   export default {
     props: {
       name: {
@@ -64,9 +30,7 @@ import GoBackButton from '@/components/GoBackButton'
     data() {
       return {
         city: {},
-        originMapUrl: '',
-        destinationMapUrl: '',
-        activeData: ['1', '2']
+        urlImage: ''
       }
     },
 
@@ -75,19 +39,17 @@ import GoBackButton from '@/components/GoBackButton'
     },
 
     methods: {
-      ...mapActions('transactions', [
-        'getTransactionById'
+      ...mapActions('cities', [
+        'getCityByName'
       ]),
 
-      handleChange(val) {
-        console.log(val);
-      },
-
-      async getImageMap (lat, lng, state) {
+      async addImageCity (name) {
         try {
           let response = await this.axios.get(
-          `https://www.mapquestapi.com/staticmap/v5/map?key=cqsmsbNRfMi3H4TpMwIgcyDmhtZyj7sV&center=${lat},${lng},${state}&size=600,400@2x&zoom=10`)
-          return response.config.url
+          `https://pixabay.com/api/?key=8736190-865a9fb42edeeac362e9d5ce4&?q=${name}`)
+          this.urlImage = response.data.hits[0].webformatURL
+          console.log('img: ', this.urlImage)
+          return this.urlImage
         } catch (error) {
           console.log(error)
         }
@@ -96,13 +58,11 @@ import GoBackButton from '@/components/GoBackButton'
 
     async created () {
       try {
-        let query = await this.queryTransactions
-        this.transaction = await this.getTransactionById(this.name, this.queryTransactions)
-        this.originMapUrl = await this.getImageMap(this.transaction.origin.lat, this.transaction.origin.lng, this.transaction.origin.name)
-        this.destinationMapUrl = await this.getImageMap(this.transaction.destination.lat, this.transaction.destination.lng, this.transaction.destination.name)
-        console.log('TRANSACTION ------ ', this.transaction)
+        // let query = await this.queryCities
+        this.city = await this.getCityByName(this.name)
+        this.addImageCity(this.name)
       } catch (error) {
-        console.log('ERROR TRANSACTION ------ ', error)
+        console.log('ERROR Created City Detail ------ ', error)
       }
     }
   }

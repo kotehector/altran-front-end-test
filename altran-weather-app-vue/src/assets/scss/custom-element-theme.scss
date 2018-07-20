@@ -1,33 +1,10 @@
-$--font-size-base: 10px !default;
+$--font-size-base: 10px !important;
 
 /* Color del tema */
 $--color-primary: #7942ed !default;
 $--color-grey: #8D8E93 !default;
 $--color-dark: #333333 !default;
-
 $--color-background: #fce256;
-//Form validation color
-$--color-success: #b9e076;
-
-/* Select
--------------------------- */
-$--select-option-disabled-color: #333;
-$--select-option-selected: #333;
-$--select-option-selected-hover: #333;
-
-//Checkbox
-$--checkbox-input-border-radius: 0;
-$--checkbox-checked-icon-color: $--color-primary;
-$--checkbox-checked-input-fill: #FFF;
-
-//TABLE
-$--table-border:  1px solid #e0e0e6;
-$--table-header-color: #9698a1;
-$--table-text-color: $--color-dark;
-$--table-header-background: $--color-background;
-$--table-row-hover-background: $--color-background;
-$--table-current-row-background: $--color-background;
-$--table-footer-background: $--color-background;
 
 /* Ubicación de la fuente, obligatoria */
 $--font-path: '~element-ui/lib/theme-chalk/fonts';

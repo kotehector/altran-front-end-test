@@ -1,21 +1,17 @@
 <template>
   <div id="app">
+
     <div v-if="activeUser.isActive">  
-      <el-container>
-        <el-header
-          height="auto">
-          <h1>{{ activeUser.data.username || '' }}</h1>
-          <font-awesome-icon 
-            icon="sign-out-alt"
-            @click="onLogout" />
-          <GoBackButton />
-        </el-header>
+      <el-container direction="vertical">
+
+        <TheHeader :user="activeUser.data" />
         
         <el-main>
           <router-view></router-view>
         </el-main>
       </el-container>
     </div>
+
     <div v-else>
       <router-view></router-view>
     </div>
@@ -24,7 +20,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import GoBackButton from '@/components/GoBackButton'
+import TheHeader from '@/components/TheHeader'
 export default {
   name: 'App',
 
@@ -33,23 +29,13 @@ export default {
   },
 
   components: {
-    GoBackButton
+    TheHeader
   },
 
   methods: {
     ...mapActions('user', [
-      'getUser',
-      'logout'
-    ]),
-
-    async onLogout () {
-      try {
-        await this.logout()
-        this.$router.push('/login')
-      } catch (error) {
-        
-      }
-    }
+      'getUser'
+    ])
   },
 
   created () {
@@ -61,11 +47,11 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/scss/custom-element-theme.scss";
+@import "assets/scss/element-variables.scss";
 
-img {
-  width: 100%;
-  height: auto;
+body {
+  margin: 0;
+  background: $--color-primary;
 }
 
 #app {
@@ -73,7 +59,8 @@ img {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
-  background: $--color-background;
-  color: #2c3e50;
+  // background: $--color-primary;
+  color: $--color-text-primary;
+  
 }
 </style>
