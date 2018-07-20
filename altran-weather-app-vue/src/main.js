@@ -1,17 +1,16 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import moment from 'vue-moment'
 
-// Config Variables Sass to Element-UI and Compile .css
-// import '@/assets/scss/theme/index.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import locale from 'element-ui/lib/locale/lang/es'
+
 // require styles swiper
 import 'swiper/dist/css/swiper.css'
-import locale from 'element-ui/lib/locale/lang/es'
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEye, faSignOutAlt, faSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -23,17 +22,23 @@ import store from './store'
 Vue.config.productionTip = false
 
 /* Librerías (Third Party) */
+// Axios
+axios.defaults.baseURL = 'http://api.openweathermap.org/data/2.5'
 Vue.use(VueAxios, axios)
+
+// Swiper
 Vue.use(VueAwesomeSwiper, {
   slidesPerView: 3,
   spaceBetween: 30
-  // pagination: {
-  //   el: '.swiper-pagination',
-  //   clickable: true
-  // }
 })
+
+// Moment
+Vue.use(moment)
+
+// Element
 Vue.use(ElementUI, { locale })
 
+// Font Awesome
 library.add(faEye, faSignOutAlt, faSun)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

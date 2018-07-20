@@ -7,7 +7,6 @@ const state = {
     // q: '',
     // id: null,
     appid: 'd034d8fcdf9f603479f06b76f175884c',
-    lang: 'es',
     units: 'metric'
   }
 }
@@ -27,47 +26,47 @@ const mutations = {
 }
 
 const actions = {
+  // Cargar Ciudades Predefinidas
   async getCities ({ commit }) {
+    let query = state.queryCity
     try {
       const response = await Vue.axios.get(
-        'http://api.openweathermap.org/data/2.5/group?id=3871336,3435910,3936456,3448439&units=metric&appid=d034d8fcdf9f603479f06b76f175884c')
+        '/group?id=3871336,3435910,3936456,3448439', {
+          params: query
+        })
       const cities = response.data.list
-
       commit('SET_CITIES', cities)
     } catch (error) {
-      console.log('error', error.response)
       return error.response
     }
   },
 
+  // Cargar Pronóstico para 5d - intervalos 3h
   async getCityForecast5Days ({ state }, id) {
     let query = state.queryCity
     query.id = id
     try {
       let response = await Vue.axios.get(
-        'http://api.openweathermap.org/data/2.5/forecast', {
+        '/forecast', {
           params: query
         })
-      console.log('getCityHistoricalData - result : ', response)
       return response.data.list
     } catch (error) {
-      console.log('error', error.response)
       return error.response
     }
   },
 
+  // Buscar Ciudad por Nombre
   async getCityByName ({ state }, name) {
     let query = state.queryCity
     query.q = name
     try {
       let response = await Vue.axios.get(
-        'http://api.openweathermap.org/data/2.5/weather', {
+        '/weather', {
           params: query
         })
-      console.log('getCityByName - result : ', response)
       return response.data
     } catch (error) {
-      console.log('error', error.response)
       return error.response
     }
   },

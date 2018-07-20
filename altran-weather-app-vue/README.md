@@ -1,6 +1,26 @@
-# citibox-challenge
+# Prueba Código Altran Front End
 
-> Prueba código Citibox
+Crear App para Previsualizar la previsión de la Temperatura
+
+## Tecnología Utilizada
+
+- VueJs (framework)
+- Vuex (state)
+- Vue Router (router app)
+- Element-UI (componentes)
+- Swiper (slider)
+- Moment (time)
+- EsLint (buenas prácticas código js)
+- Openweathermap API
+- Git
+- Responsive Web Design
+
+## Funcionalidad App
+
+- Simular Sistema Login con Token
+- Lista de Ciudades con Temperatura
+- Previsualización de Previsión del Tiempo a 5 días
+- Ver detalle de una Ciudad por ruta parametrizable
 
 ## Build Setup
 
@@ -26,5 +46,3 @@ npm run e2e
 # run all tests
 npm test
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

@@ -1,19 +1,14 @@
 <template>
-  <el-row 
+  <el-row
     type="flex"
     class="row-historical-data"
     justify="center"
     align="middle">
     <el-col :span="24">
-      <h1>Previsión</h1>
-      <!-- <el-carousel :interval="4000" type="card" height="50px">
-        <el-carousel-item v-for="item in forecast" :key="item.id">
-          <h3>{{ item.main.temp }}</h3>
-        </el-carousel-item>
-      </el-carousel> -->
       <swiper>
-        <swiper-slide v-for="item in forecast" :key="item.id">
-          <h3>{{ item.main.temp }}</h3>
+        <swiper-slide v-for="day in forecast" :key="day.id">
+          <h6>{{ day.dt | moment('DD-MM HH:mm') }}</h6>
+          <h3>{{ day.main.temp }}º</h3>
         </swiper-slide>
       </swiper>
     </el-col>
@@ -28,10 +23,10 @@ export default {
     id: {
       type: Number,
       required: true
-    },
+    }
   },
 
-  data() {
+  data () {
     return {
       forecast: []
     }
@@ -50,6 +45,13 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.swiper-slide {
+  h6 {
+    margin-bottom: .5rem;
+  }
+  h3 {
+    margin-top: 0;
+  }
+}
 </style>

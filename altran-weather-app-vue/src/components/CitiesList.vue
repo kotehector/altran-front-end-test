@@ -1,18 +1,19 @@
 <template>
-  <el-row :gutter="10">
-    <el-col 
-      :xs="24" :sm="12" :md="6"
-      v-for="city in cities"
-      :key="city.id">
-      
-      <CitiesListItem :city="city" />
+  <el-row :gutter='10'>
+    <el-col
+      :xs='24' :sm='12' :md='6'
+      v-for='city in cities'
+      :key='city.id'>
+
+      <CitiesListItem :city='city' />
 
     </el-col>
   </el-row>
 </template>
 
 <script>
-import CitiesListItem from "@/components/CitiesListItem";
+import CitiesListItem from '@/components/CitiesListItem'
+
 export default {
 
   props: {
@@ -23,9 +24,9 @@ export default {
   },
 
   components: {
-    CitiesListItem,
+    CitiesListItem
   }
-  
+
 }
 </script>
 

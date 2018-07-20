@@ -1,11 +1,11 @@
 <template>
   <div id="app">
 
-    <div v-if="activeUser.isActive">  
+    <div v-if="activeUser.isActive">
       <el-container direction="vertical">
 
         <TheHeader :user="activeUser.data" />
-        
+
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -15,6 +15,7 @@
     <div v-else>
       <router-view></router-view>
     </div>
+
   </div>
 </template>
 
@@ -48,6 +49,7 @@ export default {
 
 <style lang="scss">
 @import "assets/scss/element-variables.scss";
+@import '../static/theme/index.css';
 
 body {
   margin: 0;
@@ -58,9 +60,6 @@ body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  // background: $--color-primary;
   color: $--color-text-primary;
-  
 }
 </style>

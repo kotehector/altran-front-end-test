@@ -1,13 +1,13 @@
 <template>
   <el-header
     height="auto">
-    <el-row 
+    <el-row
       type="flex"
       class="row-temp"
       justify="space-between"
       align="middle">
       <h1>Hola, {{ user.username || '' }}</h1>
-      <font-awesome-icon 
+      <font-awesome-icon
         icon="sign-out-alt"
         @click="onLogout" />
     </el-row>
@@ -18,11 +18,12 @@
 import { mapActions } from 'vuex'
 
 export default {
+
   props: {
     user: {
       type: Object,
       required: true
-    },
+    }
   },
 
   methods: {
@@ -35,7 +36,7 @@ export default {
         await this.logout()
         this.$router.push('/login')
       } catch (error) {
-        
+
       }
     }
   }

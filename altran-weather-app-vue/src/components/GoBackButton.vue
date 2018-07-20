@@ -1,21 +1,23 @@
 <template>
   <div>
-    <el-button type="text" @click="goBack">
+    <el-button
+      type="info"
+      @click="goBack">
       Volver
     </el-button>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'go-back-button',
-    
-    methods: {
-      goBack () {
-        this.$router.go(-1)
-      },
-    },
+export default {
+
+  methods: {
+    goBack () {
+      this.$router.go(-1)
+    }
   }
+
+}
 </script>
 
 <style scoped>

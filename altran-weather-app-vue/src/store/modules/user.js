@@ -23,7 +23,6 @@ const mutations = {
 
 const actions = {
   async login ({ commit, dispatch }, creds) {
-    console.log('CREDS: ', creds)
     try {
       if (creds.username === 'Bret' || creds.username === 'bret') {
         await dispatch('getUser', 1)
@@ -49,7 +48,6 @@ const actions = {
       localStorage.setItem('user-id', user.data.id)
       localStorage.setItem('token', 'JWT')
     } catch (error) {
-      // console.log(error)
     }
   }
 }
